@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.reddit.com)",
+      "Bash(git init:*)",
+      "Bash(git branch:*)",
+      "Bash(gh repo:*)",
+      "Bash(brew list:*)",
+      "Bash(brew install:*)",
+      "Bash(gh auth:*)",
+      "WebSearch",
+      "WebFetch(domain:www.onlinewebfonts.com)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(gh api:*)",
+      "Bash(git push:*)",
+      "Bash(gh run:*)",
+      "Bash(convert icon.svg -resize 180x180 icon-180.png)",
+      "Bash(convert icon.svg -resize 192x192 icon-192.png)",
+      "Bash(convert icon.svg -resize 512x512 icon-512.png)",
+      "Bash(ls -la icon-*.png)",
+      "Bash(curl -s -o /tmp/exocet.woff2 'https://db.onlinewebfonts.com/t/1241ae66485548a9fed1d3c923f27761.woff2')",
+      "Read(//tmp/**)",
+      "Bash(magick icon.svg -resize 180x180 icon-180.png)",
+      "Bash(magick icon.svg -resize 192x192 icon-192.png)",
+      "Bash(magick icon.svg -resize 512x512 icon-512.png)",
+      "Bash(curl -s -o /tmp/exocet.ttf 'https://db.onlinewebfonts.com/t/1241ae66485548a9fed1d3c923f27761.ttf')",
+      "Bash(magick -size 512x512 xc:'#1a1a2e' -font /tmp/exocet.ttf -pointsize 220 -fill '#d4a745' -gravity center -annotate +0+0 'D2R' -draw \"roundrectangle 0,0 511,511 80,80\" /tmp/icon-test.png)",
+      "Bash(open /tmp/icon-test.png)",
+      "Bash(magick -size 512x512 xc:none -fill '#1a1a2e' -draw \"roundrectangle 0,0 511,511 80,80\" -font /tmp/exocet.ttf -pointsize 220 -fill '#d4a745' -gravity center -annotate +0+10 'D2R' /tmp/icon-test2.png)",
+      "Bash(magick -size 512x512 xc:none -fill '#1a1a2e' -draw \"roundrectangle 0,0 511,511 80,80\" -font /tmp/exocet.ttf -pointsize 180 -fill '#d4a745' -gravity center -annotate +0+10 'D2R' /tmp/icon-test3.png)",
+      "Bash(ls /Users/ceece/Workspace/items-to-keep-in-d2r/icon*)",
+      "Bash(git rm:*)"
+    ]
+  }
+}

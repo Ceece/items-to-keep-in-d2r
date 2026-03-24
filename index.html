@@ -748,19 +748,47 @@ function escHtml(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(
 
 function highlight(text, q){
   if(!q) return escHtml(text);
-  const esc=escHtml(text);
+  // try exact match first
   const re=new RegExp("("+q.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+")","gi");
-  return esc.replace(re,"<mark>$1</mark>");
+  const esc=escHtml(text);
+  if(re.test(text)) return esc.replace(re,"<mark>$1</mark>");
+  // fuzzy normalized highlight: walk through original text matching normalized query chars
+  const qN=norm(q);
+  if(!qN) return esc;
+  const lower=text.toLowerCase();
+  // find the start position in the original text
+  let qi=0, start=-1, end=-1;
+  for(let i=0;i<lower.length;i++){
+    const ch=lower[i];
+    if(norm(ch)==="") continue; // skip special chars
+    if(ch===qN[qi]||(norm(ch)===qN[qi])){
+      if(qi===0) start=i;
+      qi++;
+      if(qi===qN.length){ end=i+1; break; }
+    } else if(start>=0){
+      // restart: backtrack
+      i=start; qi=0; start=-1;
+    }
+  }
+  if(start>=0 && end>0){
+    return escHtml(text.slice(0,start))+"<mark>"+escHtml(text.slice(start,end))+"</mark>"+escHtml(text.slice(end));
+  }
+  return esc;
 }
+
+function norm(s){return s.toLowerCase().replace(/[^a-z0-9\u0E00-\u0E7F]/g,"");}
 
 function render(){
   const q=searchEl.value.trim().toLowerCase();
+  const qNorm=norm(q);
   const tier=tierEl.value;
   let filtered=DATA.filter(r=>{
     if(tier && r[2]!==tier) return false;
     if(q){
       const hay=(r[0]+" "+r[1]+" "+TIER_LABELS[r[2]]+" "+r[3]).toLowerCase();
-      return hay.includes(q);
+      if(hay.includes(q)) return true;
+      const hayNorm=norm(hay);
+      return hayNorm.includes(qNorm);
     }
     return true;
   });
