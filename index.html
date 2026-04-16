@@ -22,7 +22,7 @@
     url("https://db.onlinewebfonts.com/t/1241ae66485548a9fed1d3c923f27761.woff")format("woff"),
     url("https://db.onlinewebfonts.com/t/1241ae66485548a9fed1d3c923f27761.ttf")format("truetype"),
     url("https://db.onlinewebfonts.com/t/1241ae66485548a9fed1d3c923f27761.svg#ExocetOTCECY-Medium")format("svg");
-}
+  }
   :root {
     --bg: #1a1a2e;
     --surface: #16213e;
@@ -41,36 +41,40 @@
   }
   .header {
     text-align: center;
-    padding: 2rem 1rem 1rem;
+    padding: 1.5rem 1rem 0.75rem;
     background: linear-gradient(180deg, #0f3460 0%, var(--bg) 100%);
   }
   .header h1 {
     font-family: 'ExocetOTCECY-Medium', Georgia, serif;
     color: var(--gold);
-    font-size: 2.2rem;
+    font-size: 2rem;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.2rem;
   }
-  .header p {
-    color: var(--muted);
-    font-size: 0.9rem;
-  }
+  .header p { color: var(--muted); font-size: 0.85rem; }
   .header a { color: var(--accent); text-decoration: none; }
   .header a:hover { text-decoration: underline; }
+
   .controls {
-    max-width: 900px;
-    margin: 1.5rem auto 1rem;
+    max-width: 1100px;
+    margin: 1rem auto 0.75rem;
     padding: 0 1rem;
     display: flex;
     gap: 0.75rem;
     flex-wrap: wrap;
     align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
   }
   #search {
     flex: 1;
     min-width: 200px;
-    padding: 0.6rem 1rem;
+    padding: 0.55rem 1rem;
     border: 1px solid var(--border);
     border-radius: 6px;
     background: var(--surface);
@@ -80,65 +84,185 @@
   }
   #search:focus { border-color: var(--gold); }
   #search::placeholder { color: var(--muted); }
-  #tierFilter {
-    padding: 0.6rem 0.75rem;
+  #sectionFilter {
+    padding: 0.55rem 0.75rem;
     border: 1px solid var(--border);
     border-radius: 6px;
     background: var(--surface);
     color: var(--text);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     cursor: pointer;
     outline: none;
   }
   .count {
     color: var(--muted);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     margin-left: auto;
+    white-space: nowrap;
   }
-  .table-wrap {
-    max-width: 900px;
+
+  .content {
+    max-width: 1100px;
     margin: 0 auto 2rem;
     padding: 0 1rem;
-    overflow-x: auto;
   }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.9rem;
-  }
-  thead th {
-    background: var(--border);
+
+  .section { margin-bottom: 1.25rem; }
+  .section-heading {
+    font-family: 'ExocetOTCECY-Medium', Georgia, serif;
     color: var(--gold);
-    padding: 0.6rem 0.75rem;
-    text-align: left;
-    position: sticky;
-    top: 0;
-    cursor: pointer;
-    user-select: none;
-    white-space: nowrap;
+    font-size: 1.1rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    padding: 0.45rem 0.75rem;
+    background: var(--border);
+    border-radius: 6px 6px 0 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
-  thead th:hover { color: #fff; }
-  thead th::after { content: ' ⇅'; font-size: 0.7rem; color: var(--muted); }
-  tbody tr { border-bottom: 1px solid #1e2a4a; }
-  tbody tr:hover { background: rgba(233,69,96,0.07); }
-  td { padding: 0.5rem 0.75rem; vertical-align: top; }
-  td:nth-child(1) { font-family: 'ExocetOTCECY-Medium', Georgia, serif; color: #fff; font-weight: 600; font-size: 0.95rem; text-transform: uppercase; white-space: nowrap; }
-  td:nth-child(2) { white-space: nowrap; }
-  .tier {
-    display: inline-block;
-    padding: 0.15rem 0.5rem;
-    border-radius: 4px;
-    font-size: 0.75rem;
+  .tier-badge {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .tier-hdhv { background: #b8860b44; color: #ffd700; }
+  .tier-hdmv { background: #4682b444; color: #87ceeb; }
+  .tier-ldlv { background: #2e8b5744; color: #66cdaa; }
+  .tier-ndnv { background: #8b000044; color: #cd5c5c; }
+  .section-heading .section-count {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .sub-heading {
+    font-family: 'ExocetOTCECY-Medium', Georgia, serif;
+    color: var(--muted);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    padding: 0.35rem 0.75rem;
+    background: #0f3460aa;
+  }
+  .chip-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 0.5rem 0.6rem;
+    background: var(--surface);
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+  }
+  .chip-grid:last-child {
+    border-bottom: 1px solid var(--border);
+    border-radius: 0 0 6px 6px;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.6rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .chip:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+  .chip.active {
+    background: rgba(233, 69, 96, 0.15);
+    border-color: var(--accent);
+  }
+  .chip-name {
+    color: #f5f5f5;
+    font-size: 0.84rem;
     font-weight: 600;
     white-space: nowrap;
+    letter-spacing: 0.01em;
   }
-  .tier-High { background: #b8860b33; color: #ffd700; }
-  .tier-Med { background: #4682b433; color: #87ceeb; }
-  .tier-Low { background: #2e8b5733; color: #66cdaa; }
-  .tier-None { background: #55555533; color: #999; }
-  .tier-TRASH { background: #8b000033; color: #cd5c5c; }
-  .notes { color: var(--muted); font-size: 0.82rem; }
-  mark { background: var(--accent); color: #fff; border-radius: 2px; padding: 0 2px; }
+  .chip.no-desc .chip-name { cursor: default; }
+
+  .chip-desc {
+    display: none;
+    position: fixed;
+    z-index: 200;
+    max-width: min(400px, 90vw);
+    padding: 0.6rem 0.8rem;
+    background: #0d1b36;
+    border: 1px solid var(--gold);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 0.82rem;
+    line-height: 1.5;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    pointer-events: none;
+  }
+  .chip-desc .desc-item-name {
+    font-family: 'ExocetOTCECY-Medium', Georgia, serif;
+    color: var(--gold);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    margin-bottom: 0.3rem;
+  }
+  .chip-desc.show { display: block; }
+
+  /* When searching, show inline desc */
+  .chip-inline-desc {
+    display: none;
+    width: 100%;
+    margin-top: 0.25rem;
+    color: #c5c9d4;
+    font-size: 0.8rem;
+    line-height: 1.45;
+  }
+  .chip.expanded {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .chip.expanded .chip-inline-desc { display: block; }
+
+  .def-list {
+    list-style: none;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+  }
+  .def-list li {
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid #1e2a4a;
+    line-height: 1.55;
+    font-size: 0.85rem;
+  }
+  .def-list li:last-child { border-bottom: none; }
+  .def-list .def-name {
+    color: var(--gold);
+    font-weight: 600;
+  }
+  .def-list .def-desc {
+    color: var(--text);
+  }
+
+  mark { background: var(--accent); color: #fff; border-radius: 0; padding: 0; }
+
+  .no-results {
+    text-align: center;
+    color: var(--muted);
+    padding: 3rem 1rem;
+    font-size: 1rem;
+  }
   .footer {
     text-align: center;
     padding: 1.5rem;
@@ -147,27 +271,16 @@
     border-top: 1px solid var(--border);
   }
   .footer a { color: var(--accent); text-decoration: none; }
+
   @media (max-width: 700px) {
-    .header h1 { font-size: 1.6rem; }
+    .header h1 { font-size: 1.5rem; }
     .controls { flex-direction: column; }
-    #search, #tierFilter { width: 100%; font-size: 16px; }
+    #search, #sectionFilter { width: 100%; font-size: 16px; }
     .count { margin-left: 0; }
-    table, thead, tbody, tr, th, td { display: block; }
-    thead { display: none; }
-    tbody tr {
-      padding: 0.75rem;
-      margin-bottom: 0.5rem;
-      background: var(--surface);
-      border-radius: 8px;
-      border: 1px solid var(--border);
-    }
-    td { padding: 0.2rem 0; border: none; }
-    td:nth-child(1) { font-size: 1rem; margin-bottom: 0.25rem; }
-    td:nth-child(2)::before { content: "Category: "; color: var(--muted); font-size: 0.75rem; }
-    td:nth-child(2) { font-size: 0.82rem; margin-bottom: 0.25rem; }
-    td:nth-child(3) { margin-bottom: 0.25rem; }
-    td:nth-child(4) { font-size: 0.82rem; }
-    .table-wrap { padding: 0 0.5rem; }
+    .content { padding: 0 0.5rem; }
+    .chip-grid { gap: 5px; padding: 0.4rem; }
+    .chip { padding: 0.25rem 0.5rem; }
+    .chip-name { font-size: 0.78rem; }
   }
 </style>
 </head>
@@ -180,148 +293,375 @@
 </div>
 
 <div class="controls">
-  <input type="text" id="search" placeholder="Search items, notes, category..." autofocus>
-  <select id="tierFilter">
-    <option value="">All Tiers</option>
-    <option value="High">High</option>
-    <option value="Med">Med</option>
-    <option value="Low">Low</option>
-    <option value="None">None</option>
-    <option value="TRASH">TRASH</option>
+  <input type="text" id="search" placeholder="Search items..." autofocus>
+  <select id="sectionFilter">
+    <option value="">All Sections</option>
   </select>
   <span class="count" id="count"></span>
 </div>
 
-<div class="table-wrap">
-  <table id="items">
-    <thead>
-      <tr>
-        <th data-col="0">Item</th>
-        <th data-col="1">Category</th>
-        <th data-col="2">Tier</th>
-        <th data-col="3">Notes</th>
-      </tr>
-    </thead>
-    <tbody id="tbody"></tbody>
-  </table>
-</div>
+<div class="content" id="content"></div>
 
 <div class="footer">
-  Credit: <a href="https://maxroll.gg/d2/items/valuable-unique-set-items" target="_blank">Maxroll.gg Valuable Unique &amp; Set Items</a>
-  &bull; <a href="https://www.reddit.com/r/Diablo_2_Resurrected/wiki/items-to-keep-in-d2r/" target="_blank">Nokk's Guide on r/Diablo_2_Resurrected</a>
+  Credit: <a href="https://www.reddit.com/r/Diablo_2_Resurrected/wiki/items-to-keep-in-d2r/" target="_blank">Nokk's Guide on r/Diablo_2_Resurrected</a>
 </div>
 
-<script>
-let DATA=[];
+<!-- Floating tooltip -->
+<div class="chip-desc" id="tooltip"></div>
 
-fetch("data.csv").then(r=>r.text()).then(t=>{
-  DATA=t.trim().split("\n").slice(1).map(line=>{
-    const m=[];let cur="",inQ=false;
-    for(let i=0;i<line.length;i++){
-      const c=line[i];
-      if(c==='"'){inQ=!inQ;}
-      else if(c===','&&!inQ){m.push(cur);cur="";}
-      else{cur+=c;}
+<script>
+let SECTIONS = [];
+let TOTAL_ITEMS = 0;
+let activeChip = null;
+
+const contentEl = document.getElementById("content");
+const searchEl = document.getElementById("search");
+const sectionFilterEl = document.getElementById("sectionFilter");
+const countEl = document.getElementById("count");
+const tooltip = document.getElementById("tooltip");
+
+function escHtml(s) {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+function norm(s) {
+  return s.toLowerCase().replace(/[^a-z0-9\u0E00-\u0E7F]/g, "");
+}
+
+// Fuzzy match: query is split into contiguous chunks (each ≥2 chars) found in order
+// e.g. "talguard" → "tal" + "guard" in "talrashasguardianship"
+// e.g. "talad" → "tal" + "ad" in "talrashasadjudication"
+// e.g. "tal" won't match "wartraveler" (no contiguous "tal" substring)
+function fuzzyMatch(text, qNorm) {
+  const textN = norm(text);
+  if (!qNorm || qNorm.length < 2) return null;
+  function search(qi, ti) {
+    if (qi >= qNorm.length) return [];
+    const remain = qNorm.length - qi;
+    for (let len = remain; len >= 2; len--) {
+      const chunk = qNorm.slice(qi, qi + len);
+      const pos = textN.indexOf(chunk, ti);
+      if (pos < 0) continue;
+      const rest = search(qi + len, pos + len);
+      if (rest !== null) {
+        const indices = [];
+        for (let i = 0; i < len; i++) indices.push(pos + i);
+        return indices.concat(rest);
+      }
     }
-    m.push(cur);
-    return m;
-  });
-  render();
+    return null;
+  }
+  return search(0, 0);
+}
+
+// Map indices from norm'd string back to original string
+function normIndexMap(text) {
+  const map = []; // map[normIndex] = originalIndex
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i].toLowerCase();
+    if (norm(ch) !== "") map.push(i);
+  }
+  return map;
+}
+
+function highlight(text, q) {
+  if (!q) return escHtml(text);
+  // 1) exact substring
+  const re = new RegExp("(" + q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "gi");
+  if (re.test(text)) return escHtml(text).replace(new RegExp("(" + q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "gi"), "<mark>$1</mark>");
+  // 2) normalized contiguous substring
+  const qN = norm(q);
+  if (!qN) return escHtml(text);
+  const textN = norm(text);
+  const ni = textN.indexOf(qN);
+  if (ni >= 0) {
+    const map = normIndexMap(text);
+    const start = map[ni];
+    const end = map[ni + qN.length - 1] + 1;
+    return escHtml(text.slice(0, start)) + "<mark>" + escHtml(text.slice(start, end)) + "</mark>" + escHtml(text.slice(end));
+  }
+  // 3) fuzzy subsequence highlight
+  const indices = fuzzyMatch(text, qN);
+  if (!indices) return escHtml(text);
+  const map = normIndexMap(text);
+  const origIndices = new Set(indices.map(i => map[i]));
+  let out = "";
+  for (let i = 0; i < text.length; i++) {
+    const esc = escHtml(text[i]);
+    if (origIndices.has(i)) out += "<mark>" + esc + "</mark>";
+    else out += esc;
+  }
+  return out;
+}
+
+function matchesQuery(text, q, qNorm) {
+  const lower = text.toLowerCase();
+  if (lower.includes(q)) return true;
+  if (norm(lower).includes(qNorm)) return true;
+  return fuzzyMatch(text, qNorm) !== null;
+}
+
+function parseMarkdown(md) {
+  const lines = md.split("\n");
+  const sections = [];
+  let currentSection = null;
+  let currentSubHeading = null;
+  for (const line of lines) {
+    if (line.startsWith("## ")) {
+      const title = line.replace(/^## /, "").replace(/:?\s*$/, "").trim();
+      currentSection = { title, desc: "", subSections: [], items: [] };
+      currentSubHeading = null;
+      sections.push(currentSection);
+      continue;
+    }
+    if (line.startsWith("### ") && currentSection) {
+      const title = line.replace(/^### /, "").trim();
+      currentSubHeading = { title, items: [] };
+      currentSection.subSections.push(currentSubHeading);
+      continue;
+    }
+    if (line.startsWith("- ") && currentSection) {
+      const raw = line.replace(/^- /, "").trim();
+      const boldMatch = raw.match(/^\*\*(.+?)\*\*\s*:?\s*(.*)/);
+      let name, desc;
+      if (boldMatch) {
+        name = boldMatch[1].trim();
+        desc = boldMatch[2].trim();
+      } else {
+        name = raw;
+        desc = "";
+      }
+      const item = { name, desc };
+      if (currentSubHeading) {
+        currentSubHeading.items.push(item);
+      } else {
+        currentSection.items.push(item);
+      }
+      continue;
+    }
+    if (currentSection && currentSection.items.length === 0 && currentSection.subSections.length === 0 && line.trim() && !line.startsWith("#") && !line.startsWith("-")) {
+      if (currentSection.desc) currentSection.desc += " ";
+      currentSection.desc += line.trim();
+    }
+  }
+  return sections;
+}
+
+function countItems(sections) {
+  let total = 0;
+  for (const sec of sections) {
+    total += sec.items.length;
+    for (const sub of sec.subSections) total += sub.items.length;
+  }
+  return total;
+}
+
+function populateSectionFilter() {
+  for (const sec of SECTIONS) {
+    const opt = document.createElement("option");
+    opt.value = sec.title;
+    opt.textContent = sec.title;
+    sectionFilterEl.appendChild(opt);
+  }
+}
+
+const TIER_MAP = {
+  "Godly Drops": ["High", "tier-hdhv"],
+  "GG Gear": ["High", "tier-hdhv"],
+  "Ultimate MF Items": ["Mid", "tier-hdmv"],
+  "Perfect Merc Gear": ["Mid", "tier-hdmv"],
+  "Epic Melee Items": ["Mid", "tier-hdmv"],
+  "Master Ranged Gear": ["Mid", "tier-hdmv"],
+  "Superior Set Iems": ["Low", "tier-ldlv"],
+  "Superior Melee Gear": ["Low", "tier-ldlv"],
+  "Superior Ranged Items": ["Low", "tier-ldlv"],
+  "Budget MF Items": ["Low", "tier-ldlv"],
+  "Budget Merc Gear": ["Trash", "tier-ndnv"],
+  "Worthless Items (Charsi Food)": ["Trash", "tier-ndnv"],
+};
+
+function tierBadge(title) {
+  const t = TIER_MAP[title];
+  if (!t) return "";
+  return `<span class="tier-badge ${t[1]}">${t[0]}</span>`;
+}
+
+function renderChip(item, q, isSearching) {
+  const nameHtml = highlight(item.name, q);
+  const hasDesc = !!item.desc;
+  const noCls = hasDesc ? "" : " no-desc";
+  if (isSearching && hasDesc) {
+    return `<div class="chip expanded${noCls}" data-desc="${escHtml(item.desc)}" data-name="${escHtml(item.name)}">
+      <span class="chip-name">${nameHtml}</span>
+      <span class="chip-inline-desc">${escHtml(item.desc)}</span>
+    </div>`;
+  }
+  return `<div class="chip${noCls}" data-desc="${escHtml(item.desc)}" data-name="${escHtml(item.name)}">
+    <span class="chip-name">${nameHtml}</span>
+  </div>`;
+}
+
+function render() {
+  const q = searchEl.value.trim();
+  const qLower = q.toLowerCase();
+  const qNorm = norm(q);
+  const sectionFilter = sectionFilterEl.value;
+  const isSearching = !!q;
+  let html = "";
+  let matchedItems = 0;
+
+  const IS_DEF_SECTION = "Item Categories in D2R";
+
+  for (const sec of SECTIONS) {
+    if (sectionFilter && sec.title !== sectionFilter) continue;
+
+    // Definition section: always show full, hide when searching
+    if (sec.title === IS_DEF_SECTION) {
+      if (isSearching) continue;
+      html += `<div class="section">`;
+      html += `<div class="section-heading">${escHtml(sec.title)}</div>`;
+      html += `<ul class="def-list">`;
+      for (const item of sec.items) {
+        html += `<li><span class="def-name">${escHtml(item.name)}</span> <span class="def-desc">${escHtml(item.desc)}</span></li>`;
+      }
+      html += `</ul></div>`;
+      continue;
+    }
+
+    let sectionChips = "";
+    let sectionItemCount = 0;
+    let subHtml = "";
+
+    for (const item of sec.items) {
+      if (!qLower || matchesQuery(item.name, qLower, qNorm)) {
+        sectionChips += renderChip(item, q, isSearching);
+        sectionItemCount++;
+      }
+    }
+
+    for (const sub of sec.subSections) {
+      let subChips = "";
+      let subCount = 0;
+      for (const item of sub.items) {
+        if (!qLower || matchesQuery(item.name, qLower, qNorm)) {
+          subChips += renderChip(item, q, isSearching);
+          subCount++;
+        }
+      }
+      if (subChips) {
+        subHtml += `<div class="sub-heading">${highlight(sub.title, q)}</div>`;
+        subHtml += `<div class="chip-grid">${subChips}</div>`;
+        sectionItemCount += subCount;
+      }
+    }
+
+    if (sectionItemCount === 0) continue;
+
+    html += `<div class="section">`;
+    html += `<div class="section-heading">${tierBadge(sec.title)}${highlight(sec.title, q)} <span class="section-count">(${sectionItemCount})</span></div>`;
+    if (sectionChips) {
+      html += `<div class="chip-grid">${sectionChips}</div>`;
+    }
+    html += subHtml;
+    html += `</div>`;
+    matchedItems += sectionItemCount;
+  }
+
+  if (!html) {
+    html = `<div class="no-results">No items found</div>`;
+  }
+
+  contentEl.innerHTML = html;
+  countEl.textContent = matchedItems + " / " + TOTAL_ITEMS + " items";
+  hideTooltip();
+}
+
+// Tooltip logic
+function showTooltip(chip, x, y) {
+  const desc = chip.getAttribute("data-desc");
+  const name = chip.getAttribute("data-name");
+  if (!desc) return;
+  tooltip.innerHTML = `<div class="desc-item-name">${escHtml(name)}</div>${escHtml(desc)}`;
+  tooltip.classList.add("show");
+
+  // Position
+  const tw = tooltip.offsetWidth;
+  const th = tooltip.offsetHeight;
+  let left = x + 12;
+  let top = y + 12;
+  if (left + tw > window.innerWidth - 10) left = window.innerWidth - tw - 10;
+  if (top + th > window.innerHeight - 10) top = y - th - 12;
+  if (left < 5) left = 5;
+  if (top < 5) top = 5;
+  tooltip.style.left = left + "px";
+  tooltip.style.top = top + "px";
+
+  if (activeChip) activeChip.classList.remove("active");
+  chip.classList.add("active");
+  activeChip = chip;
+}
+
+function hideTooltip() {
+  tooltip.classList.remove("show");
+  if (activeChip) {
+    activeChip.classList.remove("active");
+    activeChip = null;
+  }
+}
+
+// Desktop: hover
+contentEl.addEventListener("mouseover", e => {
+  const chip = e.target.closest(".chip:not(.no-desc):not(.expanded)");
+  if (chip) showTooltip(chip, e.clientX, e.clientY);
+});
+contentEl.addEventListener("mousemove", e => {
+  if (!activeChip) return;
+  const chip = e.target.closest(".chip:not(.no-desc):not(.expanded)");
+  if (chip && chip === activeChip) {
+    const tw = tooltip.offsetWidth;
+    const th = tooltip.offsetHeight;
+    let left = e.clientX + 12;
+    let top = e.clientY + 12;
+    if (left + tw > window.innerWidth - 10) left = window.innerWidth - tw - 10;
+    if (top + th > window.innerHeight - 10) top = e.clientY - th - 12;
+    if (left < 5) left = 5;
+    if (top < 5) top = 5;
+    tooltip.style.left = left + "px";
+    tooltip.style.top = top + "px";
+  } else if (!chip) {
+    hideTooltip();
+  }
+});
+contentEl.addEventListener("mouseout", e => {
+  const chip = e.target.closest(".chip");
+  if (chip && !chip.contains(e.relatedTarget)) hideTooltip();
 });
 
+// Mobile: tap to toggle
+contentEl.addEventListener("click", e => {
+  const chip = e.target.closest(".chip:not(.no-desc):not(.expanded)");
+  if (!chip) { hideTooltip(); return; }
+  if (activeChip === chip) { hideTooltip(); return; }
+  const rect = chip.getBoundingClientRect();
+  showTooltip(chip, rect.left, rect.bottom);
+});
 
+// Close tooltip on outside tap
+document.addEventListener("click", e => {
+  if (!e.target.closest(".chip") && !e.target.closest(".chip-desc")) hideTooltip();
+});
 
-const TIER_LABELS={High:"High",Med:"Med",Low:"Low",None:"None",TRASH:"TRASH"};
-const TIER_CLASS={High:"tier-High",Med:"tier-Med",Low:"tier-Low",None:"tier-None",TRASH:"tier-TRASH"};
-
-const tbody=document.getElementById("tbody");
-const searchEl=document.getElementById("search");
-const tierEl=document.getElementById("tierFilter");
-const countEl=document.getElementById("count");
-
-let sortCol=0, sortAsc=true;
-
-function escHtml(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
-
-function highlight(text, q){
-  if(!q) return escHtml(text);
-  // try exact match first
-  const re=new RegExp("("+q.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+")","gi");
-  const esc=escHtml(text);
-  if(re.test(text)) return esc.replace(re,"<mark>$1</mark>");
-  // fuzzy normalized highlight: walk through original text matching normalized query chars
-  const qN=norm(q);
-  if(!qN) return esc;
-  const lower=text.toLowerCase();
-  // find the start position in the original text
-  let qi=0, start=-1, end=-1;
-  for(let i=0;i<lower.length;i++){
-    const ch=lower[i];
-    if(norm(ch)==="") continue; // skip special chars
-    if(ch===qN[qi]||(norm(ch)===qN[qi])){
-      if(qi===0) start=i;
-      qi++;
-      if(qi===qN.length){ end=i+1; break; }
-    } else if(start>=0){
-      // restart: backtrack
-      i=start; qi=0; start=-1;
-    }
-  }
-  if(start>=0 && end>0){
-    return escHtml(text.slice(0,start))+"<mark>"+escHtml(text.slice(start,end))+"</mark>"+escHtml(text.slice(end));
-  }
-  return esc;
-}
-
-function norm(s){return s.toLowerCase().replace(/[^a-z0-9\u0E00-\u0E7F]/g,"");}
-
-function render(){
-  const q=searchEl.value.trim().toLowerCase();
-  const qNorm=norm(q);
-  const tier=tierEl.value;
-  let filtered=DATA.filter(r=>{
-    if(tier && r[2]!==tier) return false;
-    if(q){
-      const hay=(r[0]+" "+r[1]+" "+TIER_LABELS[r[2]]+" "+r[3]).toLowerCase();
-      if(hay.includes(q)) return true;
-      const hayNorm=norm(hay);
-      return hayNorm.includes(qNorm);
-    }
-    return true;
-  });
-  filtered.sort((a,b)=>{
-    let va=a[sortCol], vb=b[sortCol];
-    if(sortCol===2){va=TIER_LABELS[va];vb=TIER_LABELS[vb];}
-    const cmp=va.localeCompare(vb);
-    return sortAsc?cmp:-cmp;
-  });
-  const rows=filtered.map(r=>{
-    const tierLabel=TIER_LABELS[r[2]];
-    const tierCls=TIER_CLASS[r[2]];
-    return `<tr>
-      <td>${highlight(r[0],searchEl.value.trim())}</td>
-      <td>${highlight(r[1],searchEl.value.trim())}</td>
-      <td><span class="tier ${tierCls}">${escHtml(tierLabel)}</span></td>
-      <td class="notes">${highlight(r[3],searchEl.value.trim())}</td>
-    </tr>`;
-  }).join("");
-  tbody.innerHTML=rows;
-  countEl.textContent=filtered.length+" / "+DATA.length+" items";
-}
-
-searchEl.addEventListener("input",render);
-tierEl.addEventListener("change",render);
-
-document.querySelectorAll("thead th").forEach(th=>{
-  th.addEventListener("click",()=>{
-    const col=+th.dataset.col;
-    if(sortCol===col) sortAsc=!sortAsc;
-    else { sortCol=col; sortAsc=true; }
+fetch("items-to-keep-in-d2r.md")
+  .then(r => r.text())
+  .then(md => {
+    SECTIONS = parseMarkdown(md);
+    TOTAL_ITEMS = countItems(SECTIONS);
+    populateSectionFilter();
     render();
   });
-});
 
-render();
+searchEl.addEventListener("input", render);
+sectionFilterEl.addEventListener("change", render);
 </script>
 </body>
 </html>
